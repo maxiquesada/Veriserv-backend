@@ -9,9 +9,6 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="VeriServ API", version="1.0.0")
 
-from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
-app.add_middleware(HTTPSRedirectMiddleware)
-
 app.add_middleware(CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
