@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import auth, users, contractors, jobs, reviews, admin
-from app.core.config import settings
 from app.db.database import engine
 from app.models import base as models
 
@@ -9,11 +8,13 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="VeriServ API", version="1.0.0")
 
-app.add_middleware(CORSMiddleware,
+app.add_middleware(
+    CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
     allow_methods=["*"],
-    allow_headers=["*"])
+    allow_headers=["*"],
+)
 
 app.include_router(auth.router,        prefix="/api/auth",       tags=["Auth"])
 app.include_router(users.router,       prefix="/api/users",      tags=["Users"])
